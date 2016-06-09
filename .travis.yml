@@ -29,7 +29,7 @@ before_install:
       tar xf $LLVM_ARCHIVE_PATH -C $HOME/clang-$LLVM_VERSION --strip-components 1;
       ln -sf $HOME/clang-$LLVM_VERSION/bin/clang++ $HOME/clang-$LLVM_VERSION/bin/clang++-3.7;
       export PATH=$HOME/clang-$LLVM_VERSION/bin:$PATH;
-      export CPPFLAGS="-I $HOME/clang-$LLVM_VERSION/include/c++/v1";
+      export CPPFLAGS="-I $HOME/clang-$LLVM_VERSION/include/c++/v1 -L$HOME/clang-$LLVM_VERSION/lib -stdlib=libc++";
       echo "Using clang at " `which $CC-3.7` " and $CXX at " `which $CXX-3.7`;
     fi
 
