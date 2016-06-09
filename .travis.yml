@@ -15,9 +15,8 @@ compiler:
   - clang
 
 env:
-  # Killed due to more than 50 mins to finish.
-  # BUILD_TYPE=Debug VECTOR_COPY_ELISION_LEVEL=joinwithbinaryexpressions
-  - BUILD_TYPE=Release VECTOR_COPY_ELISION_LEVEL=joinwithbinaryexpressions
+  - BUILD_TYPE=Debug VECTOR_COPY_ELISION_LEVEL=selection
+  - BUILD_TYPE=Release VECTOR_COPY_ELISION_LEVEL=selection
   - BUILD_TYPE=Debug VECTOR_COPY_ELISION_LEVEL=none
   - BUILD_TYPE=Release VECTOR_COPY_ELISION_LEVEL=none
 
@@ -35,7 +34,7 @@ before_install:
     fi
 
 install:
-  - if [ "$VECTOR_COPY_ELISION_LEVEL" = "joinwithbinaryexpressions" ] && [ "$CC" = "gcc" ]; then
+  - if [ "$VECTOR_COPY_ELISION_LEVEL" = "selection" ] && [ "$CC" = "gcc" ]; then
       export MAKE_JOBS=1;
     else
       export MAKE_JOBS=2;
