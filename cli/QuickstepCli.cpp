@@ -36,6 +36,8 @@
 #include <stdlib.h>
 #endif
 
+#include <gperftools/profiler.h>
+
 #include "cli/CliConfig.h"  // For QUICKSTEP_USE_LINENOISE.
 #include "cli/CommandExecutor.hpp"
 #include "cli/DropRelation.hpp"
@@ -430,9 +432,16 @@ int main(int argc, char* argv[]) {
         reset_parser = true;
         break;
       }
+			// Start profiling 
+			if (!query_num) {
+        char *name = "profile.prof";
+        cout << "Writing to " << name << '\n';
+        ProfilerStart(name);
+      }
+      ++query_num;
     }
-
-    if (quitting) {
+    
+		if (quitting) {
       break;
     } else if (reset_parser) {
       parser_wrapper.reset(new SqlParserWrapper());

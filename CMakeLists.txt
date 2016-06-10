@@ -170,6 +170,12 @@ if(LIBNUMA_FOUND)
   include_directories(${LIBNUMA_INCLUDE_DIR})
 endif()
 
+# Following lines add the gperftools' profiler library to $LIBS.
+# Use these lines to profile quickstep using gperftools.
+include_directories("/usr/include/gperftools")
+link_directories(/usr/lib)
+set(LIBS ${LIBS} profiler)
+
 # Enable C++14 support.
 set(CPP14_SUPPORTED FALSE)
 include(CheckCXXSourceCompiles)
