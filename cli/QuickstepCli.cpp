@@ -337,6 +337,7 @@ int main(int argc, char* argv[]) {
   std::unique_ptr<SqlParserWrapper> parser_wrapper(new SqlParserWrapper());
   std::chrono::time_point<std::chrono::steady_clock> start, end;
 
+  unsigned int query_num = 0;
   for (;;) {
     string *command_string = new string();
     *command_string = line_reader.getNextCommand();
@@ -434,9 +435,9 @@ int main(int argc, char* argv[]) {
       }
 			// Start profiling 
 			if (!query_num) {
-        char *name = "profile.prof";
-        cout << "Writing to " << name << '\n';
-        ProfilerStart(name);
+        std::string name = "profile.prof";
+        std::cout << "Writing to " << name << '\n';
+        ProfilerStart(name.c_str());
       }
       ++query_num;
     }
